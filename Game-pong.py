@@ -39,7 +39,7 @@ ball.shape("circle")
 ball.color("red")
 ball.penup()
 ball.goto(0 , 0)
-ball.dx =0.2
+ball.dx =0.3
 ball.dy =0.2
 
 # pen
@@ -114,7 +114,7 @@ while True:
     if ball.xcor() > 390:
         ball.goto(0 , 0)
         ball.dx *= -1
-        winsound.PlaySound('ding.mp3',winsound.SND_ASYNC)
+        winsound.PlaySound('laugh.wav',winsound.SND_ASYNC)
 
 
         score_a += 1
@@ -124,7 +124,7 @@ while True:
     if ball.xcor() < -390:
         ball.goto(0 , 0)
         ball.dx *= -1
-        winsound.PlaySound('ding.mp3', winsound.SND_ASYNC)
+        winsound.PlaySound('laugh.wav', winsound.SND_ASYNC)
 
         score_b +=1
         pen.clear()
@@ -134,9 +134,9 @@ while True:
     if (ball.xcor() < -340 and ball.xcor() > -350) and (ball.ycor() < paddle_a.ycor() + 40 and ball.ycor() > paddle_a.ycor() -40 ):
         ball.setx(-340)
         ball.dx *= -1
-        winsound.PlaySound("ding.mp3", winsound.SND_ASYNC)
+        winsound.PlaySound("oh yeah.wav", winsound.SND_ASYNC)
 
     if (ball.xcor() > 340 and ball.xcor() < 350) and (ball.ycor() < paddle_b.ycor() + 40 and ball.ycor() > paddle_b.ycor() -40 ):
         ball.setx(340)
         ball.dx *= -1
-        winsound.PlaySound("ding.mp3", winsound.SND_ASYNC)
+        winsound.PlaySound("oh yeah.wav", winsound.SND_ASYNC)
