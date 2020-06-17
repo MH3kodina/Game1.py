@@ -3,12 +3,16 @@
 # part 1 : Getting started.
 
 import turtle
+import winsound
 
 wn = turtle.Screen()
 wn.title("pong by amin-fatehi")
 wn.bgcolor("black")
 wn.setup(width = 800 , height = 600)
 wn.tracer(0)
+# score
+score_a =0
+score_b =0
 
 # paddle A
 paddle_a = turtle.Turtle()
@@ -37,6 +41,16 @@ ball.penup()
 ball.goto(0 , 0)
 ball.dx = 0.2
 ball.dy = 0.2
+
+# pen
+pen = turtle.Turtle()
+pen.speed(0)
+pen.color("white")
+pen.penup()
+pen.hideturtle()
+pen.goto(0 , 260)
+pen.write("Player A: 0   |   Player: 0" , align="center" , font=("courier",24, "normal"))
+
 
 # function
 def paddle_a_up():
@@ -77,21 +91,67 @@ while True:
     ball.sety(ball.ycor() + ball.dy)
 
 
-    # border checkking
+    # border checking
 
     if ball.ycor() > 290:
         ball.sety(290)
         ball.dy *= -1
+        winsound.PlaySound('ding.mp3',winsound.SND_ASYNC)
+
+    if paddle_a.ycor() > 290:
+        paddle_a.sety(290)
+
+    if paddle_b.ycor() > 290:
+        paddle_b.sety(290)
+
+
 
     if ball.ycor() < -290:
         ball.sety(-290)
         ball.dy *= -1
+        winsound.PlaySound('ding.mp3',winsound.SND_ASYNC)
 
+    if paddle_a.ycor() < -290:
+        paddle_a.sety(-290)
+    if paddle_b.ycor() < -290:
+        paddle_b.sety(-290)
 
     if ball.xcor() > 390:
         ball.goto(0 , 0)
         ball.dx *= -1
+        winsound.PlaySound('ding.mp3',winsound.SND_ASYNC)
+
+
+        score_a += 1
+        pen.clear()
+        pen.write("Player A:  {}  |   Player B: {}".format(score_a , score_b) , align="center" , font=("courier",24, "normal"))
+
+
+
+
 
     if ball.xcor() < -390:
         ball.goto(0 , 0)
         ball.dx *= -1
+        winsound.PlaySound('ding.mp3', winsound.SND_ASYNC)
+
+        score_b +=1
+        pen.clear()
+        pen.write("Player A:  {}  |   Player B: {}".format(score_a , score_b) , align="center" , font=("courier",24, "normal"))
+
+
+
+
+
+
+
+    #paddle and ball collisions
+    if (ball.xcor() < -340 and ball.xcor() > -350) and (ball.ycor() < paddle_a.ycor() + 40 and ball.ycor() > paddle_a.ycor() -40 ):
+        ball.setx(-340)
+        ball.dx *= -1
+        winsound.PlaySound("ding.mp3", winsound.SND_ASYNC)
+
+    if (ball.xcor() > 340 and ball.xcor() < 350) and (ball.ycor() < paddle_b.ycor() + 40 and ball.ycor() > paddle_b.ycor() -40 ):
+        ball.setx(340)
+        ball.dx *= -1
+        winsound.PlaySound("ding.mp3", winsound.SND_ASYNC)
